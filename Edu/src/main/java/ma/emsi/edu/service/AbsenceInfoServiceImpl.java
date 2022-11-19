@@ -148,5 +148,10 @@ public class AbsenceInfoServiceImpl  implements AbsenceInfoService {
 			// TODO Auto-generated method stub
 			return absenceinfoRepository.absenceinfobyreservation(id);
 		}
+		@Override
+		public List<AbsenceInfo> checkUnMarkedAbsence(long id) {
+			// TODO Auto-generated method stub
+			return absenceinfoRepository.checkUnMarkedAbsence(id);
+		}
 
 }

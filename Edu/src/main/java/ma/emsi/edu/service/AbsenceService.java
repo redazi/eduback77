@@ -16,4 +16,5 @@ public interface AbsenceService {
 	Absence getAbsence(Long id);
 	
 	List<Absence> liste();
+	
 }

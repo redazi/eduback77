@@ -2,6 +2,8 @@ package ma.emsi.edu.register;
 
 import java.util.List;
 
+import javax.persistence.Column;
+
 public class SignupRequest {
 	
 	
@@ -15,9 +17,10 @@ public class SignupRequest {
     private String email;
     
     private List<String> role;
-    
+    @Column(name = "picByte", length = 100000)
+ 	private byte[] picByte;
     private String password;
-  
+ 
     public String getUsername() {
         return username;
     }
@@ -42,7 +45,15 @@ public class SignupRequest {
         this.password = password;
     }
     
-    public List<String> getRole() {
+    public byte[] getPicByte() {
+		return picByte;
+	}
+
+	public void setPicByte(byte[] picByte) {
+		this.picByte = picByte;
+	}
+
+	public List<String> getRole() {
       return this.role;
     }
     

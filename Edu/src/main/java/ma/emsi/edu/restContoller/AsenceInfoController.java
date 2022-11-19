@@ -90,8 +90,29 @@ System.out.println("ffefefeff :"+username);
 	}
 	@GetMapping("/absenceinfobyreservation/{id}")
 	public List<AbsenceInfo> absenceinfobyreservation(@PathVariable long id) {
+		List<AbsenceInfo> absenceInfo = new ArrayList(); 
+		AbsenceInfo absenceInfo1;
+	
+		for(AbsenceInfo absenceInfo2 : absenceInfoService.absenceinfobyreservation(id)){
+			//System.out.println(client.getPicByte());
+
+			/*final Optional<Client> retrievedImage = imageRepository.findByName(img.getName());
+			img1 = new ImageModel(retrievedImage.get().getName(), retrievedImage.get().getType(),
+					decompressBytes(retrievedImage.get().getPicByte()));
+			imgs.add(img1);*/
+			try {
+				//System.out.println("amm heeereee : "+client.getPicByte().length);
+				absenceInfo2.getClient().setPicByte(absenceInfoService.decompressBytes(absenceInfo2.getClient().getPicByte()));
+				absenceInfo1 = new AbsenceInfo(absenceInfo2.getId(),absenceInfo2.getClient(),absenceInfo2.getReservation(),absenceInfo2.getStatus(),absenceInfo2.isAbsence());
+				absenceInfo.add(absenceInfo1);
+			} catch (Exception e) {
+				// TODO: handle exception
+				System.out.println("null values exist !!!");
+			}
+			
+		}
 		
-		return absenceInfoService.absenceinfobyreservation(id);
+		return absenceInfo;
 	}
 	@GetMapping("/listeReservationvalide")
 	public List<Reservation> listeReservationvalide() {
@@ -105,7 +126,12 @@ System.out.println("ffefefeff :"+username);
 	}
 	@GetMapping("/{id}")
 	public AbsenceInfo getById(@PathVariable Long id) {
+		
 		return absenceInfoService.getAbsenceInfo(id);
+	}
+	@GetMapping("checkunmarkedabsence/{id}")
+	public List<AbsenceInfo> checkunmarkedabsence(@PathVariable Long id) {
+		return absenceInfoService.checkUnMarkedAbsence(id);
 	}
 
 	@GetMapping("/delete/{id}")

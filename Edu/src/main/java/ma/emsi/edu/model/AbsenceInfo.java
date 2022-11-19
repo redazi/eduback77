@@ -19,6 +19,17 @@ public class AbsenceInfo {
 	private String status;
 	private boolean absence ;
 	
+	public AbsenceInfo() {
+		super();
+	}
+	public AbsenceInfo(long id, Client client, Reservation reservation, String status, boolean absence) {
+		super();
+		this.id = id;
+		this.client = client;
+		this.reservation = reservation;
+		this.status = status;
+		this.absence = absence;
+	}
 	public long getId() {
 		return id;
 	}

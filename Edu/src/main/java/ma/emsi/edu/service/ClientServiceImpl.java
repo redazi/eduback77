@@ -38,9 +38,10 @@ public class ClientServiceImpl implements ClientService {
         	client1.setNom(client.getNom());
         	client1.setActive(client.isActive());
         	client1.setPassword(client.getPassword());
-        	client1.setPrenom(client.getPassword());
+        	client1.setPrenom(client.getPrenom());
         	client1.setRoles(client.getRoles());
         	client1.setUserName(client.getUserName());
+        	client1.setPicByte(client.getPicByte());
         	
         	
         	

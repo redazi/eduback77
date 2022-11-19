@@ -9,37 +9,42 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import ma.emsi.edu.service.PlannificationServiceImpl;
+
 @Entity
 public class Panier {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id ;
 	@ManyToOne
-	private Utilisateur util;
-	@OneToMany
-	private List<Formation> formation ;
+	private Client client;
+	@ManyToOne 
+
+	private Plannification planification ;
 	public long getId() {
 		return id;
 	}
 	public void setId(long id) {
 		this.id = id;
 	}
-	public Utilisateur getUtil() {
-		return util;
+	public Client getClient() {
+		return client;
 	}
-	public void setUtil(Utilisateur util) {
-		this.util = util;
+	public void setClient(Client client) {
+		this.client = client;
 	}
-	public List<Formation> getFormation() {
-		return formation;
+	public Plannification getPlanification() {
+		return planification;
 	}
-	public void setFormation(List<Formation> formation) {
-		this.formation = formation;
+	public void setPlanification(Plannification planification) {
+		this.planification = planification;
 	}
 	@Override
 	public String toString() {
-		return "Panier [id=" + id + ", util=" + util + ", formation=" + formation + "]";
+		return "Panier [id=" + id + ", client=" + client + ", planification=" + planification + "]";
 	}
+	
+	
 	
 	
 	

@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import ma.emsi.edu.model.Absence;
 import ma.emsi.edu.model.AbsenceInfo;
 import ma.emsi.edu.model.Client;
 import ma.emsi.edu.model.Reservation;
@@ -27,5 +28,6 @@ public interface AbsenceInfoService {
 	List<Client> listeEtudiant(long idreservation);
 	List<Reservation> reservationwithabsencevalide(String nom);
 	List<AbsenceInfo> absenceinfobyreservation(long id);
+	List<AbsenceInfo> checkUnMarkedAbsence(long id);
 
 }

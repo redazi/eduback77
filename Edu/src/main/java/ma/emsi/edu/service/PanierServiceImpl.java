@@ -28,8 +28,8 @@ public PanierServiceImpl(PanierRepository panierRepository) {
 		// TODO Auto-generated method stub
 		Panier panier2 = panierRepository.getById(id);
 		if(panier2!=null) {
-			panier2.setFormation(panier.getFormation());
-			panier2.setUtil(panier.getUtil());
+			panier2.setClient(panier.getClient());
+			panier2.setPlanification(panier.getPlanification());
 			
 			panierRepository.save(panier2);
 		}
@@ -52,6 +52,16 @@ public PanierServiceImpl(PanierRepository panierRepository) {
 	public List<Panier> liste() {
 		// TODO Auto-generated method stub
 		return panierRepository.findAll();
+	}
+	@Override
+	public List<Panier> getPlanificationByClient(Long id ) {
+		// TODO Auto-generated method stub
+		return panierRepository.getPlanificationByClient(id);
+	}
+	@Override
+	public List<Panier> checkIfDejaExist(Long id, Long id1) {
+		// TODO Auto-generated method stub
+		return panierRepository.checkIfDejaExist(id, id1);
 	}
 
 

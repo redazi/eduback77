@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,6 +16,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import ma.emsi.edu.model.Client;
 import ma.emsi.edu.model.Formateur;
+import ma.emsi.edu.model.Role;
+import ma.emsi.edu.repository.RoleRepository;
 import ma.emsi.edu.service.FormateurService;
 
 @RestController
@@ -23,14 +26,21 @@ import ma.emsi.edu.service.FormateurService;
 public class FormateurController {
 	@Autowired
 	FormateurService formateurService;
+	@Autowired
+	PasswordEncoder encoder;
+	@Autowired
+	RoleRepository roleRepo;
 	@PostMapping
 	public void ajouter(@RequestBody Formateur formateur) {
+		Role rclient = roleRepo.findById((long) 2).get();
+		List<Role> roles = new ArrayList<Role>();
+		roles.add(rclient);
 		System.out.println("ana dkhaallt");
 		if(formateur.getPicByte()==null)
 		System.out.println("heeereeeeee22");
-	
+		formateur.setPassword(encoder.encode(formateur.getPassword())); 
 			System.out.println("Original Image Byte Size - " + formateur.getPicByte());
-			
+			formateur.setRoles(roles);
 			formateur.setPicByte(formateurService.compressBytes(formateur.getPicByte()));
 			formateurService.ajouter(formateur);
 	
@@ -38,6 +48,7 @@ public class FormateurController {
 
 	@GetMapping
 	public List<Formateur> liste() {
+		
 		List<Formateur> formateurs = new ArrayList(); 
 		System.out.println("reeeeeeeeeeeeeeeeeeeedaaaaaaaaaaa");
 		Formateur formateur1;
@@ -53,6 +64,7 @@ public class FormateurController {
 			try {
 				System.out.println("amm heeereee : "+formateur.getPicByte().length);
 				formateur1 = new Formateur(formateur.getId(),formateur.getUserName(),formateur.getPassword(),formateur.getNom(),formateur.getPrenom(),formateur.getAge(),formateur.getEmail(),formateur.getCin(),formateurService.decompressBytes(formateur.getPicByte()),formateur.getSalaire(),formateur.getDernierPaiement());
+		
 				formateurs.add(formateur1);
 			} catch (Exception e) {
 				// TODO: handle exception
