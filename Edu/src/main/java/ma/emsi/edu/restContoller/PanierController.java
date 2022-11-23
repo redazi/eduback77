@@ -72,14 +72,23 @@ System.out.println("l9iiinaaaah " +c.getId());
 		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication()
                 .getPrincipal();
 String username = userDetails.getUsername();
-		return panierService.checkIfDejaExist(id,utilisateurRepository.findByUserName(username).getId());
+System.out.println("heloooo 158");
+for (Panier p : panierService.checkIfDejaExist(utilisateurRepository.findByUserName(username).getId(),id)) {
+	System.out.println(p.getClient().getUserName());
+}
+		return panierService.checkIfDejaExist(utilisateurRepository.findByUserName(username).getId(),id);
 	}
 	@GetMapping("/delete/{id}")
 	public void supprimer(@PathVariable Long id) {
 		panierService.supprimer(id);
 
 	}
-	
+	@GetMapping("/getplanifbyres/{id}")
+	public Long GetPlanificationByRes(@PathVariable Long id) {
+		return panierService.GetPlanificationByRes(id);
+
+	}
+	;
 	@PutMapping("/{id}")
     public void modifier(@PathVariable(value = "id", required = false) final Long id, @RequestBody Panier panier ) {
 		panierService.modifier(panier,id);

@@ -35,5 +35,6 @@ public interface AbsenceInfoRepository extends JpaRepository<AbsenceInfo , Long>
 	List<AbsenceInfo> absenceinfobyreservation(long id);
 	@Query("Select a from AbsenceInfo a where a.reservation.id = ?1 and a.status is null  ")
 	List<AbsenceInfo> checkUnMarkedAbsence(long id);
-	
+	@Query("Select a from AbsenceInfo a where a.client.id = ?1  ")
+	List<AbsenceInfo> absenceinfobyclient(long id);
 }

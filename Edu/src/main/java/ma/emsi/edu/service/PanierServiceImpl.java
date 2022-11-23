@@ -63,6 +63,11 @@ public PanierServiceImpl(PanierRepository panierRepository) {
 		// TODO Auto-generated method stub
 		return panierRepository.checkIfDejaExist(id, id1);
 	}
+	@Override
+	public Long GetPlanificationByRes(Long id) {
+		// TODO Auto-generated method stub
+		return panierRepository.GetPlanificationByRes(id);
+	}
 
 
 }

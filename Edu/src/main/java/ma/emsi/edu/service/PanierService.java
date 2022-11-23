@@ -18,4 +18,5 @@ public interface PanierService {
 	List<Panier> liste();
 	List<Panier> getPlanificationByClient(Long id );
 	List<Panier> checkIfDejaExist(Long id,Long id1);
+	Long GetPlanificationByRes(Long id);
 }

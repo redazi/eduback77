@@ -29,5 +29,5 @@ public interface AbsenceInfoService {
 	List<Reservation> reservationwithabsencevalide(String nom);
 	List<AbsenceInfo> absenceinfobyreservation(long id);
 	List<AbsenceInfo> checkUnMarkedAbsence(long id);
-
+	List<AbsenceInfo> absenceinfobyclient(long id);
 }

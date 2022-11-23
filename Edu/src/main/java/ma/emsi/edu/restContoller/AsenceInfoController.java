@@ -19,7 +19,9 @@ import org.springframework.web.bind.annotation.RestController;
 import ma.emsi.edu.model.AbsenceInfo;
 import ma.emsi.edu.model.Client;
 import ma.emsi.edu.model.Reservation;
+import ma.emsi.edu.repository.UtilisateurRepository;
 import ma.emsi.edu.service.AbsenceInfoService;
+import ma.emsi.edu.service.UtilisateurService;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
@@ -27,6 +29,8 @@ import ma.emsi.edu.service.AbsenceInfoService;
 public class AsenceInfoController {
 	@Autowired
 	AbsenceInfoService absenceInfoService;
+	@Autowired
+	UtilisateurRepository utilisateurrepository;
 	@PostMapping
 	public void ajouter(@RequestBody AbsenceInfo absenceInfo) {
 		absenceInfoService.ajouter(absenceInfo);
@@ -94,12 +98,7 @@ System.out.println("ffefefeff :"+username);
 		AbsenceInfo absenceInfo1;
 	
 		for(AbsenceInfo absenceInfo2 : absenceInfoService.absenceinfobyreservation(id)){
-			//System.out.println(client.getPicByte());
-
-			/*final Optional<Client> retrievedImage = imageRepository.findByName(img.getName());
-			img1 = new ImageModel(retrievedImage.get().getName(), retrievedImage.get().getType(),
-					decompressBytes(retrievedImage.get().getPicByte()));
-			imgs.add(img1);*/
+	
 			try {
 				//System.out.println("amm heeereee : "+client.getPicByte().length);
 				absenceInfo2.getClient().setPicByte(absenceInfoService.decompressBytes(absenceInfo2.getClient().getPicByte()));
@@ -133,7 +132,15 @@ System.out.println("ffefefeff :"+username);
 	public List<AbsenceInfo> checkunmarkedabsence(@PathVariable Long id) {
 		return absenceInfoService.checkUnMarkedAbsence(id);
 	}
-
+	@GetMapping("absenceinfobyclient")
+	public List<AbsenceInfo> absenceinfobyclient() {
+		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication()
+                .getPrincipal();
+String username = userDetails.getUsername();
+System.out.println("ffefefeff :"+username);
+		return absenceInfoService.absenceinfobyclient(utilisateurrepository.findByUserName(username).getId());
+	}
+	
 	@GetMapping("/delete/{id}")
 	public void supprimer(@PathVariable Long id) {
 		absenceInfoService.supprimer(id);

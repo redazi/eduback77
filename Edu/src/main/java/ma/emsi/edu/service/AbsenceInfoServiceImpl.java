@@ -153,5 +153,10 @@ public class AbsenceInfoServiceImpl  implements AbsenceInfoService {
 			// TODO Auto-generated method stub
 			return absenceinfoRepository.checkUnMarkedAbsence(id);
 		}
+		@Override
+		public List<AbsenceInfo> absenceinfobyclient(long id) {
+			// TODO Auto-generated method stub
+			return absenceinfoRepository.absenceinfobyclient(id);
+		}
 
 }
